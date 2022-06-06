@@ -1,4 +1,4 @@
-package com.sie;
+package com.sie.login;
 
 import com.util.JdbcUtil;
 import jakarta.servlet.ServletException;
@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 
 @WebServlet("/login.do")
 public class Login extends HttpServlet {
@@ -18,31 +19,41 @@ public class Login extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         String username = new String(req.getParameter("username"));
         String password = new String(req.getParameter("password"));
+        // index 页面所需数据
+        String[][] indexData = {{"over/view.jsp", "overview.svg.jsp", "概览"}, {"orders/view.jsp", "order.svg.jsp", "订单"}, {"chart/view.jsp", "chart.svg.jsp", "图表"}};
         HttpSession httpSession = req.getSession();
         String loginMsg = null;
         if (username.equals("")) {
             loginMsg = "登录失败，用户名为空！";
             httpSession.setAttribute("loginMsg", loginMsg);
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("login/loginView.jsp");
         }else if (password.equals("")) {
             loginMsg = "登录失败，密码为空！";
             httpSession.setAttribute("loginMsg", loginMsg);
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("login/loginView.jsp");
         } else {
           try{
               Connection connection = JdbcUtil.getConnection();
               Statement statement = null;
               ResultSet resultSet = null;
+              String contactWay = null;
+              String userId = null;
               statement = connection.createStatement();
               String sql = "select * from users where username = '"+ username + "' and password='" + password + "'";
               resultSet = statement.executeQuery(sql);
               if (resultSet.next()) {
+                  contactWay = resultSet.getString("contact_way");
+                  userId = resultSet.getString("userid");
                   httpSession.setAttribute("username", username);
-                  resp.sendRedirect("index.jsp");
+                  httpSession.setAttribute("password", password);
+                  httpSession.setAttribute("contactWay", contactWay);
+                  httpSession.setAttribute("userId", userId);
+                  httpSession.setAttribute("indexData", indexData);
+                  resp.sendRedirect("over/view.jsp");
               }else {
                   loginMsg = "登录失败，用户名或者密码错误！";
                   httpSession.setAttribute("loginMsg", loginMsg);
-                  resp.sendRedirect("login.jsp");
+                  resp.sendRedirect("login/loginView.jsp");
               }
               JdbcUtil.closeResource(connection, statement, resultSet);
           } catch (Exception e) {

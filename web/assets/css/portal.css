@@ -710,7 +710,7 @@ button.close:focus {
     min-height: 100vh;
     height: 100%;
     width: 100%;
-    background: #f5f6fe;
+    /*background: #f5f6fe;*/
     padding-top: 56px;
     overflow-x: hidden
 }
@@ -1134,10 +1134,6 @@ button.close:focus {
     font-size: 1rem
 }
 
-.app-card-account {
-    height: 100%
-}
-
 .app-card-account .item {
     font-size: .875rem
 }
@@ -1365,4 +1361,8 @@ button.close:focus {
 }
 .login-margin{
     margin-top: 150px
+}
+
+.cursor-disable {
+    cursor: not-allowed
 }

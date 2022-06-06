@@ -4,7 +4,8 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%--
   Created by IntelliJ IDEA.
   User: tian
   Date: 2022/5/28
@@ -16,18 +17,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="${ pageContext.request.scheme }://${ pageContext.request.serverName }:${ pageContext.request.serverPort }${ pageContext.request.contextPath }/">
     <meta charset="UTF-8">
-    <title>overview</title>
+    <title>概览——《Web程序设计》课程设计</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/portal.css">
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/echarts.min.js"></script>
 </head>
-<body>
-<c:if test="${ empty username }">
-    <jsp:forward page="login.jsp"/>
-</c:if>
+<body class="app">
 <div class="app-wrapper">
+    <jsp:include page="../base/index.jsp">
+        <jsp:param name="active" value="1"/>
+    </jsp:include>
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
             <h1 class="app-page-title">概览</h1>
@@ -80,7 +82,7 @@
                                 ￥
                             </div>
                         </div>
-                        <a class="app-card-link-mask" href="#"></a></div>
+                        <a class="app-card-link-mask" href="javascript:void(0);"></a></div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="app-card app-card-stat shadow-sm h-100">
@@ -91,7 +93,7 @@
                                 个
                             </div>
                         </div>
-                        <a class="app-card-link-mask" href="#"></a></div>
+                        <a class="app-card-link-mask" href="javascript:void(0);"></a></div>
                     </div>
                 <div class="col-6 col-lg-3">
                     <div class="app-card app-card-stat shadow-sm h-100">
@@ -100,7 +102,7 @@
                             <% out.print("<div class=\"stats-figure\">" + orderDone + "</div>"); %>
                             <div class="stats-meta">Done</div>
                         </div>
-                        <a class="app-card-link-mask" href="#"></a></div>
+                        <a class="app-card-link-mask" href="javascript:void(0);"></a></div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="app-card app-card-stat shadow-sm h-100">
@@ -109,7 +111,7 @@
                             <% out.print("<div class=\"stats-figure\">" + orderGoing + "</div>"); %>
                             <div class="stats-meta">Going</div>
                         </div>
-                        <a class="app-card-link-mask" href="#"></a></div>
+                        <a class="app-card-link-mask" href="javascript:void(0);"></a></div>
                 </div>
             </div>
             <div class="row g-4 mb-4">
@@ -145,7 +147,7 @@
 <script src="assets/js/useAjax.js"></script>
 <script>
     // 创建图表
-    getChartData(null, 'chart/index', (e) => {
+    getXhrData(null, 'chart/index', (e) => {
         var chartType = ['line', 'bar']
         var chartTooltip = ['line', 'shadow']
         const chartDoc = document.getElementsByClassName('chart_div')
@@ -194,7 +196,6 @@
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         }
-
     }, 'get')
 </script>
 </body>

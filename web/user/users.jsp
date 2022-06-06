@@ -8,18 +8,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:if test="${ empty username }">
-    <jsp:forward page="login.jsp"/>
+    <jsp:forward page="../login/loginView.jsp"/>
 </c:if>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <base href="${ pageContext.request.scheme }://${ pageContext.request.serverName }:${ pageContext.request.serverPort }${ pageContext.request.contextPath }/">
     <meta charset="UTF-8">
-    <title>users</title>
+    <title>用户中心——《Web程序设计》课程设计</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/portal.css">
 </head>
-<body>
+<body class="app">
 <div class="app-wrapper">
+    <jsp:include page="../base/index.jsp">
+        <jsp:param name="active" value="4"/>
+    </jsp:include>
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
             <h1 class="app-page-title">用户中心</h1>
@@ -34,21 +38,21 @@
                 <div class="col-12 col-md-8">
                     <div class="app-card app-card-users shadow-sm p-4">
                         <div class="app-card-body">
-                            <form>
+                            <form action="user.do" method="post">
                                 <div class="mb-3">
                                     <label for="user-input-1" class="form-label">
                                         用户名
                                     </label>
-                                    <input type="text" class="form-control" id="user-input-1" readonly required value="${ username }">
+                                    <input type="text" class="form-control bg-white cursor-disable" id="user-input-1" name="username" readonly required value="${ username }">
                                 </div>
                                 <div class="mb-3">
                                     <label for="user-input-2" class="form-label">联系方式</label>
-                                    <input type="text" class="form-control" id="user-input-2" value="Steve Doe"
+                                    <input type="text" class="form-control" id="user-input-2" name="contactWay" value="${ contactWay }"
                                            required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="user-input-3" class="form-label">修改密码</label>
-                                    <input type="email" class="form-control" id="user-input-3" value="">
+                                    <input type="password" class="form-control" id="user-input-3" name="password" value="${ password }">
                                 </div>
                                 <button type="submit" class="btn app-btn-primary">保存</button>
                             </form>
@@ -67,9 +71,7 @@
                 <div class="col-12 col-md-8">
                     <div class="app-card app-card-users shadow-sm p-4">
                         <div class="app-card-body">
-                            <form method="post" action="login.jsp" target="test">
-                                <button type="submit" class="btn btn-danger text-white">退出登录</button>
-                            </form>
+                            <a type="button" class="btn btn-danger text-white" href="login/loginView.jsp">退出登录</a>
                         </div>
                     </div>
                 </div>
@@ -79,4 +81,3 @@
 </div>
 </body>
 </html>
-

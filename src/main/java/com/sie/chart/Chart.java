@@ -17,7 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 @WebServlet("/chart/chartPage")
-public class ChartPage extends HttpServlet {
+public class Chart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);

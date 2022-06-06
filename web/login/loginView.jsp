@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <base href="${ pageContext.request.scheme }://${ pageContext.request.serverName }:${ pageContext.request.serverPort }${ pageContext.request.contextPath }/">
   <title>电商后台管理系统 - 《Web程序设计》课程设计</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">

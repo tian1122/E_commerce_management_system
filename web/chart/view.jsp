@@ -10,18 +10,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="${ pageContext.request.scheme }://${ pageContext.request.serverName }:${ pageContext.request.serverPort }${ pageContext.request.contextPath }/">
     <meta charset="UTF-8">
-    <title>charts</title>
+    <title>图表展示——《Web程序设计》课程设计</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/portal.css">
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/echarts.min.js"></script>
 </head>
-<body>
+<body class="app">
 <c:if test="${ empty username }">
-    <jsp:forward page="login.jsp"/>
+    <jsp:forward page="../login/loginView.jsp"/>
 </c:if>
 <div class="app-wrapper">
+    <jsp:include page="../base/index.jsp">
+        <jsp:param name="active" value="3"/>
+    </jsp:include>
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
             <h1 class="app-page-title">图表</h1>

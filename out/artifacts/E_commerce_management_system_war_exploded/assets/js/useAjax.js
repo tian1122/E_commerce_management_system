@@ -1,4 +1,4 @@
-function getChartData(data, url, fn, method) {
+function getXhrData(data, url, fn, method) {
     $.ajax({
         url: url,
         type: method,

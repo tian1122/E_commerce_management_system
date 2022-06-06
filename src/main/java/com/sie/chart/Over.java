@@ -17,7 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 @WebServlet("/chart/index")
-public class ChartIndex extends HttpServlet {
+public class Over extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
